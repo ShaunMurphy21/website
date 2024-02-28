@@ -2,17 +2,23 @@ function myFunction(){
 
 
     let name = document.getElementById('name').value
-
+    const namemovie = name.split(",")
     const settings = {
         async: true,
         crossDomain: true,
-        url: 'https://imdb-com.p.rapidapi.com/auto-complete?q='+name,
+        url: 'https://imdb-com.p.rapidapi.com/auto-complete?q='+namemovie[0],
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'e7db0383c3msh317381e7f613d22p15dfaajsn6a8157df7a98',
+            'X-RapidAPI-Key': namemovie[1],
             'X-RapidAPI-Host': 'imdb-com.p.rapidapi.com'
         }
     };
+
+    if(namemovie[1].length < 40){
+
+        alert('Please enter valid password!')
+
+    }
     
     $.ajax(settings).done(function (response) {
         let movUrl = 'https://vidsrc.to/embed/movie/'
