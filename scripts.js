@@ -1,6 +1,6 @@
 function myFunction(){
 
-
+//test
     let name = document.getElementById('name').value
     const namemovie = name.split(",")
     const settings = {
