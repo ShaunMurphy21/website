@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            font-family: 'Open Sans', sans-serif;
+
+
+        }
+        .showTest{
+
+            display: none;
+
+        }
+
+        .nowShow {
+
+            display: block;
+
+        }
+    </style>
+
+    <title>Shaun Murphy | Testing</title>
+</head>
+
+<body>
+    
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Used to develop:</h5>
+            </div>
+            <p class="mb-1">HTML, CSS, Javascript, Boostrap Libary</p>
+            <p class="mb-1"style="font-size: 12px">Hosted on my own domain - cloudflare protected. DNS setup for my SMTP server along with relevant DNS records for the internet. SSL certified.</p>
+
+        </a>
+    </div>
+
+    <div class="row justify-content-center mt-2 ml-5 mr-5">
+        <div class="input-group">
+            <input id="name" type="text" class="form-control" placeholder="Enter Show/Movie title" aria-label="Show Link" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+            <button id="getShow" class="btn btn-outline-secondary" type="button">Show Link</button>
+            <button id="getMovie" class="btn btn-outline-secondary" type="button" onclick="myFunction()">Movie Link</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="embed-responsive embed-responsive-16by9 m-3" style="width:auto; height: auto; max-height: 700px;max-width: 1900px;">
+        <iframe id="videoShow"class="embed-responsive-item" src="" allowfullscreen></iframe>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+ 
+</body>
+</html>
