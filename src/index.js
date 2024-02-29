@@ -52,6 +52,9 @@ function myFunction(item, i, nlist) {
     btn.className = 'btn btn-outline-primary m-1';
     //btn.type = 'button'
     btn.style.display = 'inline-block'
+    btn.style.color = '#17a5bb'
+    btn.style.backgroundColor = '#fff'
+    btn.style.borderColor = '#17a5bb'
     btn.onclick = function() {embedvideo(this.id)};
     divElement.appendChild(btn)
   }
@@ -68,8 +71,18 @@ function embedvideo(obj){
   const url = 'https://vidsrc.to/embed/movie/'
   const frame = document.createElement("iframe");
   frame.src = url + obj
+  if((navigator.userAgent).match(/iPhone|iPod|iPad/))
+  {
   frame.id = 'videoPlaying'
   frame.allowFullscreen = true
   divElement.appendChild(frame)
   
+  }else{
+
+    frame.id = 'desktopPlaying'
+    frame.allowFullscreen = true
+    divElement.appendChild(frame)
+
+
+  }
 }
