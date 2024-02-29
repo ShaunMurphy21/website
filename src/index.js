@@ -40,14 +40,17 @@ function myFunction(item, i, nlist) {
 
 function embedvideo(obj){
   const n = document.getElementById('lc')
-  n.innerHTML = ''
+  const clearSearch = document.getElementById('new')
+  clearSearch.className = 'd-flex justify-content-center mx-auto w-50 mt-1'
   const divElement = document.getElementById('lc1')
   divElement.innerHTML = ''
+  clearSearch.innerHTML = ''
+  n.innerHTML = ''
   const url = 'https://vidsrc.to/embed/movie/'
   const frame = document.createElement("iframe");
   frame.src = url + obj
   console.log(frame.src)
-  frame.allowFullscreen
+  frame.allowFullscreen = true
   divElement.appendChild(frame)
   
 }
