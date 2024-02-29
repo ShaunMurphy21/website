@@ -6,6 +6,16 @@ const movieButton = document.getElementById('movieSearch')
 movieButton.onclick = movieGet
 
 
+if(iOS){
+
+  const n = document.getElementById('lc')
+  n.className = 'btn-group-vertical d-flex justify-content-center mx-auto'
+  n.role = 'group'
+  n.style.maxWidth = '70%'
+
+
+}
+
 function movieGet(){
   (async () =>  {
     const movieTitle = document.getElementById('movieInput').value
@@ -13,9 +23,8 @@ function movieGet(){
       const n = document.getElementById('lc')
       n.innerHTML = ''
       const divElement = document.getElementById('lc1')
-    divElement.innerHTML = ''
+      divElement.innerHTML = ''
       let id = await imdbId(movieTitle);
-      console.log(id)
       id.forEach(myFunction);
     } catch (e) {
       console.error('Error :', e)
@@ -25,13 +34,30 @@ function movieGet(){
 }
 
 
+function iOS() {
+  return [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod',
+    'Windows NT'
+  ].includes(navigator.userAgentData.platform)
+  // iPad on iOS 13 detection
+  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+}
+
+
 
 function myFunction(item, i, nlist) {
+ 
     const divElement = document.getElementById('lc')
     const btn = document.createElement("button");
     btn.innerHTML = nlist[i][0][0];
     btn.id = nlist[i][1][0]
-    btn.className = 'btn btn-primary m-1';
+    btn.className = 'btn btn-secondary m-1 btn btn-outline-info btn-lg btn-block';
+    btn.type = 'button'
     //btn.style.display = 'inline-block'
     btn.onclick = function() {embedvideo(this.id)};
     divElement.appendChild(btn)
@@ -49,7 +75,7 @@ function embedvideo(obj){
   const url = 'https://vidsrc.to/embed/movie/'
   const frame = document.createElement("iframe");
   frame.src = url + obj
-  console.log(frame.src)
+  frame.id = 'videoPlaying'
   frame.allowFullscreen = true
   divElement.appendChild(frame)
   

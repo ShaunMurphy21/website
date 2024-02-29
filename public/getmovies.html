@@ -13,21 +13,6 @@
   </head>
   <style>
 
-  .lc {
-    display: flex;
-    max-width: 90%;
-  }
-
-  .lc1 {
-
-    position: inherit;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
-    
-}
 
 
   html,body{
@@ -42,20 +27,35 @@
     
 }
 
-  .new {
+  #lc1 #videoPlaying {
 
-    max-width: 60%;
+    max-height: 30dvh;
+    margin-top: 5dvh;
 
 
   }
 
-  
+  #borderTop {
+
+
+    background-color: #17a5bb;
+
+
+  }
+
+  #movieInput {
+
+    border-color: #17a5bb;
+    color: #17a5bb;
+
+  }
+
 
   </style>
   <body>
 
     <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+      <a id="borderTop" href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
           <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">Used to develop:</h5>
           </div>
@@ -70,13 +70,13 @@
       <div class="input-group mb-3">
         <input id="movieInput" type="text" class="form-control" placeholder="Enter Movie Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button id="movieSearch" class="btn btn-outline-secondary" type="button">Search</button>
+          <button id="movieSearch" class="btn btn-outline-secondary" type="button" style="color: #17a2b8;background-color: rgb(255 255 255);border-color: rgb(23, 162, 184);">Search</button>
         </div>
       </div>
     </div>
 
   
-    <div id="lc" class="d-flex justify-content-center">
+    <div id="lc" class="d-flex justify-content-center mx-auto">
 
       <!--GENERATED BUTTONS GO HERE-->
 
