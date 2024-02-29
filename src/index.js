@@ -32,7 +32,7 @@ function myFunction(item, i, nlist) {
     btn.innerHTML = nlist[i][0][0];
     btn.id = nlist[i][1][0]
     btn.className = 'btn btn-primary m-1';
-    btn.style.display = 'inline-block'
+    //btn.style.display = 'inline-block'
     btn.onclick = function() {embedvideo(this.id)};
     divElement.appendChild(btn)
   }
