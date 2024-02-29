@@ -5,16 +5,24 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 const movieButton = document.getElementById('movieSearch')
 movieButton.onclick = movieGet
 
-
-if(iOS){
-
-  const n = document.getElementById('lc')
-  n.className = 'btn-group-vertical d-flex justify-content-center mx-auto'
-  n.role = 'group'
-  n.style.maxWidth = '70%'
+window.onload = ios;
 
 
-}
+function ios(){
+  if((navigator.userAgent).match(/iPhone|iPod|iPad/))
+  {
+    const n = document.getElementById('lc')
+    n.className = 'btn-group-vertical d-flex justify-content-center mx-auto'
+    n.role = 'group'
+    n.style.maxWidth = '85vw'
+  }else
+      {
+        
+        console.log('no')
+      
+      }
+  }
+
 
 function movieGet(){
   (async () =>  {
@@ -29,24 +37,9 @@ function movieGet(){
     } catch (e) {
       console.error('Error :', e)
     }
-  })();
-
-}
+  })();}
 
 
-function iOS() {
-  return [
-    'iPad Simulator',
-    'iPhone Simulator',
-    'iPod Simulator',
-    'iPad',
-    'iPhone',
-    'iPod',
-    'Windows NT'
-  ].includes(navigator.userAgentData.platform)
-  // iPad on iOS 13 detection
-  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-}
 
 
 
@@ -56,9 +49,9 @@ function myFunction(item, i, nlist) {
     const btn = document.createElement("button");
     btn.innerHTML = nlist[i][0][0];
     btn.id = nlist[i][1][0]
-    btn.className = 'btn btn-secondary m-1 btn btn-outline-info btn-lg btn-block';
-    btn.type = 'button'
-    //btn.style.display = 'inline-block'
+    btn.className = 'btn btn-outline-primary m-1';
+    //btn.type = 'button'
+    btn.style.display = 'inline-block'
     btn.onclick = function() {embedvideo(this.id)};
     divElement.appendChild(btn)
   }
