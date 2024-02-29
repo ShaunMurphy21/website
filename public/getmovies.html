@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My First Webpage</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  </head>
+  <style>
+
+  .lc {
+    display: flex;
+  }
+
+  .lc1 {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+
+
+  html,body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    padding:0px;
+    border:none;
+}
+  iframe{
+    width:100%;
+    height:90vh;
+    overflow:auto;
+    padding:0px;
+    border:none;
+}
+
+  .new {
+
+    max-width: 60%;
+
+
+  }
+
+  
+
+  </style>
+  <body>
+
+  <
+    <div id="new" class="d-flex justify-content-center mx-auto w-50 m-3">
+      <div class="input-group mb-3">
+        <input id="movieInput" type="text" class="form-control" placeholder="Enter Movie Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button id="movieSearch" class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+      </div>
+    </div>
+
+  
+    <div id="lc" class="d-flex justify-content-center">
+
+      <!--GENERATED BUTTONS GO HERE-->
+
+    </div>
+
+    <div id="lc1" class="embed-responsive embed-responsive-16by9 m-3">
+
+      <!--Generated video player goes here-->
+
+    </div>
+
+    <script type="module" src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../dist/main.js"></script>
+  </body>
+</html>
