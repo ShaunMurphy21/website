@@ -1,7 +1,7 @@
 
 # Learning web development
 
-This project is just a learning experience. I do not intent to distribute this to end user's but rather track my progress and let other's see. So far, it's been based around learning javascript, html and css to develop websites. In the future, I'll develop using Python frameworks (django, flask) and start integration with DB's. All previous programming experience has not involved web dev. So it's all a bit new. 
+This project is just a learning experience. I do not intent to distribute this to end user's but rather track my progress and let other's see. So far, it's been based around learning javascript, html and css to develop websites. In the future, I'll develop using Python frameworks (django, flask) and start integration with DB's. All previous programming experience has not involved web dev. So it's all a bit new. Hardest  thing to learn so far has been git!
 
 Basically, this whole project is around getting me more familiar with web development and it's various technologies.
 
