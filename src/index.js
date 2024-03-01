@@ -1,7 +1,5 @@
-import fetch from 'node-fetch';
 import imdbId from 'imdb-id'
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-import { Button } from 'bootstrap';
+
 
 const movieButton = document.getElementById('movieSearch')
 movieButton.onclick = movieGet
