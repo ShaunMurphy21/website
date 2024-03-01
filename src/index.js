@@ -14,7 +14,7 @@ input.onfocus = function () {
 }
 
 function ios(){
-  if((navigator.userAgent).match(/iPhone|iPod|iPad/))
+  if((navigator.userAgent).match(/iPhone|iPod|iPad|Android/))
   {
     const n = document.getElementById('lc')
     const n1 = document.getElementById('new')
@@ -85,7 +85,7 @@ function embedvideo(obj){
   const url = 'https://vidsrc.to/embed/movie/'
   const frame = document.createElement("iframe");
   frame.src = url + obj
-  if((navigator.userAgent).match(/iPhone|iPod|iPad/))
+  if((navigator.userAgent).match(/iPhone|iPod|iPad|Android/))
   {
   frame.id = 'videoPlaying'
   frame.allowFullscreen = true
