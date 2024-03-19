@@ -18,7 +18,7 @@ searchButton.addEventListener("click", () => {
 } )
 
 async function handleButtonClick(postcode){
-    const postCodeData = `http://api.postcodes.io/postcodes/${postcode[0][0]}/nearest`
+    const postCodeData = `https://corsproxy.io/?http://api.postcodes.io/postcodes/${postcode[0][0]}/nearest`
     const apiCall = await fetch(postCodeData);
     const locationData = await apiCall.json();
     let location = []
@@ -41,10 +41,10 @@ async function policeAPICall(location){
     console.log(location.length)
     for(let i =0; i < location.length; i++){
     if(location[i] < 3){
-        policeAPIUrl = `https://data.police.uk/api/crimes-at-location?lat=${location[i][0]}&lng=${location[i][1]}`
+        policeAPIUrl = `https://corsproxy.io/?https://data.police.uk/api/crimes-at-location?lat=${location[i][0]}&lng=${location[i][1]}`
         
     }else{
-        policeAPIUrl = `https://data.police.uk/api/crimes-at-location?date=${location[i][2]}&lat=${location[i][0]}&lng=${location[i][1]}`
+        policeAPIUrl = `https://corsproxy.io/?https://data.police.uk/api/crimes-at-location?date=${location[i][2]}&lat=${location[i][0]}&lng=${location[i][1]}`
     }
     const rawCrimeData = await fetch(policeAPIUrl);
     const data = await rawCrimeData.json();
@@ -61,7 +61,7 @@ async function policeAPICall(location){
 //Below function is to deal with partial postcodes such as NG6 7D, NG6, NG6 7 etc
 async function partialPostCode(partialPostCode){
 
-    const postCodeUrl = `api.postcodes.io/postcodes/${partialPostCode}/autocomplete`
+    const postCodeUrl = `https://api.postcodes.io/postcodes/${partialPostCode}/autocomplete`
 
 
 }
@@ -83,9 +83,9 @@ function outputCrimeData(data, lng, lat){
 
         }}
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://corsproxy.io/?https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="https://corsproxy.io/?http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     n = document.getElementById('searchButton')
