@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container mt-2 mb-5" id="searchBox">
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-secondary" type="button" id="Latest">
+          New Films
+        </button>
+
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="darkModeButton"
+        >
+          Theme
+        </button>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Movie name"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          id="movieSearch"
+        />
+        <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+          Search
+        </button>
+      </div>
+    </div>
+    <h1 class="d-flex justify-content-center" id="latestHeader"></h1>
+    <div id="movieCards"></div>
+    <div id="moviePlayer"></div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
