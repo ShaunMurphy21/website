@@ -18,7 +18,7 @@ searchButton.addEventListener("click", () => {
 } )
 
 async function handleButtonClick(postcode){
-    const postCodeData = `https://corsproxy.io/?http://api.postcodes.io/postcodes/${postcode[0][0]}/nearest`
+    const postCodeData = `https://corsproxy.io/?https://api.postcodes.io/postcodes/${postcode[0][0]}/nearest`
     const apiCall = await fetch(postCodeData);
     const locationData = await apiCall.json();
     let location = []
@@ -85,7 +85,7 @@ function outputCrimeData(data, lng, lat){
 
     L.tileLayer('https://corsproxy.io/?https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://corsproxy.io/?http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="https://corsproxy.io/?https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     n = document.getElementById('searchButton')
