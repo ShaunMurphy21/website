@@ -12,3 +12,10 @@ body{
     background-color: gray;
 
 }
+
+#borderTop {
+    background-color: #17a5bb;
+    border-radius: 0px 0px 30px 30px;
+    box-shadow: 3px 3px 20px 5px #107786a6;
+    border-color: transparent;
+}
