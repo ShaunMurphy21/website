@@ -91,7 +91,7 @@ function createCard(movieData){
 
 function embedVideo(id){
 
-    const url = `https://vidsrc.to/embed/movie/tt342434`
+    const url = `https://vidsrc.to/embed/movie/${id}`
     console.log(id)
     const videoMainContainer = document.getElementById('moviePlayer')
     videoMainContainer.style.height = '75%'
