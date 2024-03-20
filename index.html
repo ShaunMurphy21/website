@@ -42,6 +42,20 @@
 
       }
 
+      #thmStats{
+
+        border-radius: 20px;
+        box-shadow: 3px 3px 10px 1px #107786a6;
+        max-width: 500px;
+
+      }
+
+      #offcanvasTop{
+
+        height: 55vh !important;
+
+      }
+
     </style>
 
     <title>Shaun Murphy | Testing</title>
@@ -131,6 +145,78 @@
           >My Projects</a>
 
 
+          <button class="btn btn-outline-info btn-lg btn-block mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" id="thmStats">My TryHackMe badges & stats</button>
+
+          <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+            <div class="offcanvas-header mb-0">
+              <button type="button mb-0" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              
+              <div class="row justify-content-center mx-auto">     
+                 <div class="row justify-content-center mt-1" id="badgeContainer">
+                  <div class="d-flex justify-content-center mx-auto mb-2">
+
+                    These badges prove a deep understanding of core cyber security principles and extended knowledge in red-team security.
+                    
+                   </div>
+
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                      <img src="/img/percent.png" class="card-img-top img-fluid mt-5 rounded" alt="...">
+                      <div class="card-body">
+                        <p class="card-text mt-3">Rank on the site. Over 1 million cyber professionals and hobbyists.</p>
+                      </div>
+                   </div>
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                       <img src="https://assets.tryhackme.com/img/badges/mrrobot.svg" class="card-img-top img-fluid" alt="...">
+                       <div class="card-body">
+                         <p class="card-text">Awarded upon completion of the Mr. Robot CTF.</p>
+                       </div>
+                   </div>
+       
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                   <img src="https://assets.tryhackme.com/img/badges/blue.svg" class="card-img-top img-fluid" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">Successfully exploiting windows using eternalblue</p>
+                   </div>
+                   </div>
+       
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                   <img src="https://assets.tryhackme.com/img/badges/webbed.svg" class="card-img-top img-fluid" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">Awarded upon completion of the WWW module</p>
+                   </div>
+                   </div>
+               
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                   <img src="https://assets.tryhackme.com/img/badges/streak7.svg" class="card-img-top img-fluid" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">Awarding upon passing a 7 day hacking streak</p>
+                   </div>
+                   </div>
+       
+                   <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                   <img src="https://assets.tryhackme.com/img/badges/introtooffensivesecurity.svg" class="card-img-top img-fluid" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">Awarded upon completion of the penetration testing module.</p>
+                   </div>
+                 </div>
+                 <div class="d-flex col-1 col-sm-8 card mx-2 mt-2" id="badge">
+                  <img src="/img/complete.png" class="card-img-top img-fluid mt-5 rounded" alt="...">
+                  <div class="card-body">
+                    <p class="card-text mt-4">48 systems successfully exploited - proving a deep understanding</p>
+                  </div>
+               </div>
+             </div>
+             </div>
+
+
+
+
+            </div>
+          </div>
+
+
         </div>
 
         <div class="d-flex justify-content-center mt-3 ">
@@ -188,51 +274,7 @@
       </div>
       
     </div>
-    <div class="container mt-1" style="max-width: 90vw">
-      <div class="row justify-content-center mx-auto mb-5"style="max-width: 90vw">     
-         
-          <div class="row justify-content-center mt-1" id="badgeContainer">
 
-            <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
-                <img src="https://assets.tryhackme.com/img/badges/mrrobot.svg" class="card-img-top img-fluid" alt="...">
-                <div class="card-body">
-                  <p class="card-text">Completeing the Mr. Robot CTF</p>
-                </div>
-            </div>
-
-
-
-
-            <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
-            <img src="https://assets.tryhackme.com/img/badges/blue.svg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <p class="card-text">Successfully exploiting windows using eternalblue</p>
-            </div>
-            </div>
-
-            <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
-            <img src="https://assets.tryhackme.com/img/badges/webbed.svg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <p class="card-text">Completion of the world wide web module</p>
-            </div>
-            </div>
-        
-            <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
-            <img src="https://assets.tryhackme.com/img/badges/streak7.svg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <p class="card-text">Awarding upon passing a 7 day hacking streak</p>
-            </div>
-            </div>
-
-            <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
-            <img src="https://assets.tryhackme.com/img/badges/introtooffensivesecurity.svg" class="card-img-top img-fluid" alt="...">
-            <div class="card-body">
-                <p class="card-text">Awarded upon completion of the penetration testing module.</p>
-            </div>
-          </div>
-      </div>
-      </div>
-    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

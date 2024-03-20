@@ -10,7 +10,6 @@ async function getSearch(){
     return movieData
 }
 
-
 function searchResults(data){
     const movieList = data['Search']
     //const newMovieList = movieList.slice(0,5)
@@ -92,7 +91,7 @@ function createCard(movieData){
 
 function embedVideo(id){
 
-    const url = `https://vidsrc.to/embed/movie/${id}`
+    const url = `https://vidsrc.to/embed/movie/tt342434`
     console.log(id)
     const videoMainContainer = document.getElementById('moviePlayer')
     videoMainContainer.style.height = '75%'
@@ -127,6 +126,7 @@ btnClick.addEventListener('click', async () => {
         const data = await getSearch();
         const movieData = await searchResults(data)
         createCard(movieData)
+        alert('please note that this will not work, removed API key due to rate limit.')
 });
 
 async function latestMovies() { // Explicitly include API key parameter
@@ -174,4 +174,5 @@ LatestBtnClick.addEventListener('click', async () => {
         latestHeader.innerText = 'Latest Releases'
         const movieData0 = await latestMovies()
         createCard(movieData0)
+        alert('please note that this will not work, removed API key due to rate limit.')
 });
