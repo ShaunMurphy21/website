@@ -10,9 +10,8 @@ async function fetchMovieData() {
   const data = await response.json();
   return data;
 }
-
+//apihere
 async function fetchMovieDetails(imdbID) {
-  const apiKey = '3d62b472'; 
   const url = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`;
   const response = await fetch(url);
 
@@ -93,8 +92,7 @@ async function displayMovies() {
 
 
 
-
-const apiKey = '3d62b472';
+//apihere
 
 if (apiKey) {
   displayMovies();
