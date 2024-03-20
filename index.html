@@ -19,47 +19,120 @@
         border-radius: 0px 0px 30px 30px;
         box-shadow: 3px 3px 20px 5px #107786a6;
         border-color: transparent;
+      
       }
 
       #banner {
         border-bottom: 20px;
+        
       }
 
       #buttonCrn {
         border-radius: 20px;
         box-shadow: 3px 3px 10px 1px #107786a6;
+        max-width: 500px;
       }
+
+      #badge{
+
+        border-color: aqua !important;
+        border-radius: 20px;
+        box-shadow: 3px 3px 10px 1px #107786a6;
+        width: 15rem;
+
+      }
+
+      #mainContent{
+
+        max-width: 100% !important;
+        margin: 0;
+      }
+
     </style>
 
     <title>Shaun Murphy | Testing</title>
   </head>
   <body>
-    <div class="list-group">
-      <a
+    <div class="list-group" id="bannerParent">
+      <div
         id="borderTop"
-        href="#"
         class="list-group-item list-group-item-action flex-column align-items-start active"
       >
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Used to develop:</h5>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Used to develop:</h5>
+          </div>
+          <p class="mb-1">HTML, CSS, Javascript, Boostrap Libary</p>
+          <p class="mb-1" style="font-size: 12px">
+            Hosted on my own domain - cloudflare protected. DNS setup for my SMTP
+            server along with relevant DNS records for the internet. SSL
+            certified.<br /><br /><b
+              >Email me on: shaunmurphyy@shaunmurphyy.co.uk</b
+            
+              
+            
+              >
+          </p>
         </div>
-        <p class="mb-1">HTML, CSS, Javascript, Boostrap Libary</p>
-        <p class="mb-1" style="font-size: 12px">
-          Hosted on my own domain - cloudflare protected. DNS setup for my SMTP
-          server along with relevant DNS records for the internet. SSL
-          certified.<br /><br /><b
-            >Email me on: shaunmurphyy@shaunmurphyy.co.uk</b
-          >
-        </p>
-      </a>
     </div>
 
-    <div class="container0">
-      <div
-        class="mx-auto"
-        class="mx-auto"
-        style="width: auto; max-width: 500px"
-      >
+
+    <div class="container" id="mainContent">
+      <div class="row w-100">
+        <div class="col-4">
+
+
+          <div class="container mt-1" style="max-width: 90vw">
+            <div class="row justify-content-center mx-auto mb-5"style="max-width: 90vw">     
+               
+                <div class="row justify-content-center mt-1" id="badgeContainer">
+      
+                  <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
+                      <img src="https://assets.tryhackme.com/img/badges/mrrobot.svg" class="card-img-top img-fluid" alt="...">
+                      <div class="card-body">
+                        <p class="card-text">Completeing the Mr. Robot CTF</p>
+                      </div>
+                  </div>
+      
+      
+      
+      
+                  <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
+                  <img src="https://assets.tryhackme.com/img/badges/blue.svg" class="card-img-top img-fluid" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">Successfully exploiting windows using eternalblue</p>
+                  </div>
+                  </div>
+      
+                  <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
+                  <img src="https://assets.tryhackme.com/img/badges/webbed.svg" class="card-img-top img-fluid" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">Completion of the world wide web module</p>
+                  </div>
+                  </div>
+              
+                  <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
+                  <img src="https://assets.tryhackme.com/img/badges/streak7.svg" class="card-img-top img-fluid" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">Awarding upon passing a 7 day hacking streak</p>
+                  </div>
+                  </div>
+      
+                  <div class="d-flex col-1 col-sm-8 card mx-2 mt-3" id="badge">
+                  <img src="https://assets.tryhackme.com/img/badges/introtooffensivesecurity.svg" class="card-img-top img-fluid" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">Awarded upon completion of the penetration testing module.</p>
+                  </div>
+                </div>
+            </div>
+            </div>
+
+
+
+
+
+        </div>
+        <div class="col-8 justify-content-center">
+
         <div class="d-flex justify-content-center mt-0 pt-5">
           <a href="#">
             <img
@@ -69,6 +142,8 @@
               style="height: 96px; width: 96px"
             />
           </a>
+
+          
         </div>
         <div class="d-flex justify-content-center mt-3 mb-0">
           <h3 style="color: #324d5c">Shaun Murphy</h3>
@@ -78,12 +153,12 @@
             Learning web development
           </h3>
         </div>
-        <div class="row justify-content-center mx-2 mt-0 ml-5 mr-5">
+        <div class="row justify-content-center mx-auto mt-0 ml-5 mr-5 w-50">
           <a
             id="buttonCrn"
             href="https://github.com/ShaunMurphy21/website"
             class="btn btn-outline-info btn-lg btn-block mb-3"
-            >Github Repositories</a
+            >Github</a
           >
           <a
             id="buttonCrn"
@@ -92,26 +167,29 @@
             data-toggle="tooltip"
             data-placement="top"
             title="TryHackMe profile"
-            >TryHackMe profile</a
+            >TryHackMe</a
           >
           <a
             id="buttonCrn"
-            href="https://discord.com/"
+            href="https://www.linkedin.com/in/ogmurphs/"
             class="btn btn-outline-info btn-lg btn-block mb-3"
-            >Join Discord Server</a
+            >LinkedIn</a
           >
-          <a
-            id="buttonCrn"
-            href="movieFolder/index.html"
-            class="btn btn-outline-info btn-lg btn-block mb-3"
-            >Movie Viewer</a
-          >
+
           <a
           id="buttonCrn"
-          href="crimeLook/index.html"
+          href="subsites/certs.html"
           class="btn btn-outline-info btn-lg btn-block mb-3"
-          >Postcode Crime Checker</a
-        >
+          >Certifications</a>
+
+          
+          <a
+          id="buttonCrn"
+          href="subsites/projects.html"
+          class="btn btn-outline-info btn-lg btn-block mb-3"
+          >My Projects</a>
+
+
         </div>
 
         <div class="d-flex justify-content-center mt-3 ">
@@ -166,26 +244,10 @@
             </li>
           </ul>
         </div>
-      </div>
-      <div class="mx-auto" style="width: auto; max-width: 80vw;">
-        <div class="row justify-content-center mt-3 ml-5 mr-5">
-          <p class="text-justify" style="font-size: 15px">
-            This website will change it's purpose and layout drastically -
-            multiple times. This is because I plan to use this website so I can
-            work on multiple projects (previous websites source code will still
-            be available on my github). So far, I am planning inventory
-            management, a simple ecommerce store and a user/employee management
-            system. I am doing this to learn how to incorporate multiple
-            different technologies into a website and develop skills in web
-            development, python and javascript. I'll be using django or
-            flask(python frameworks) and various different DBMS' (database
-            management system software) such as: MySQL, PostgreSQL, MariaDB and
-            many others to get experience with those.<br /><br />
-          </p>
         </div>
       </div>
     </div>
-
+    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -196,10 +258,6 @@
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
