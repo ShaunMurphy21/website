@@ -2,21 +2,32 @@ const apiKey = '3d62b472'
 
 
 async function getSearch(){
-    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=`
+    let url
+    let typeSearch
     const searchValue = document.getElementById('movieSearch').value;
-    const newUrl = url + searchValue
-    const data = await fetch(newUrl)
+    const typeChoice = document.getElementById('choice').value
+    if(typeChoice === 'movie'){
+        typeSearch = 'movie' 
+        url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&type=movie`
+    }else{
+
+        typeSearch = 'series'
+        url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchValue}&type=series`
+    }
+    const data = await fetch(url)
+    if(typeSearch ==='series'){typeSearch = 'tv'}
     const movieData = await data.json();
-    return movieData
+    return [movieData, typeSearch]
 }
 
 function searchResults(data){
-    const movieList = data['Search']
+    const movieList = data[0]['Search']
     //const newMovieList = movieList.slice(0,5)
     const updatedList = movieList.map(movie => ({
     imdbID: movie['imdbID'],
     Title: movie['Title'],
-    Poster: movie['Poster']
+    Poster: movie['Poster'],
+    Type: data[1]
     }))
     return updatedList
 }
@@ -25,7 +36,6 @@ function searchResults(data){
 const darkModeClick = document.getElementById('darkModeButton');
 darkModeClick.addEventListener('click', () => {
     const htmlElement = document.querySelector('html');
-    console.log(htmlElement.dataset.bsTheme)
     if(htmlElement.dataset.bsTheme == ''){
         const htmlElement = document.querySelector('html'); // Select the HTML element
         htmlElement.dataset.bsTheme = 'dark';
@@ -53,7 +63,7 @@ function createCard(movieData){
         cardDiv.style.width = '12rem'
         aTag.addEventListener('click', () => {
 
-            embedVideo(movie.imdbID)
+            embedVideo(movie.imdbID, movie.Type)
             const clearHeader = document.getElementById('latestHeader')
             clearHeader.innerHTML = ''
 
@@ -89,24 +99,27 @@ function createCard(movieData){
 
 
 
-function embedVideo(id){
-
-    const url = `https://vidsrc.to/embed/movie/${id}`
-    console.log(id)
+function embedVideo(id, type){
+    let url
+    if(type === 'movie'){url = `https://vidsrc.to/embed/movie/${id}`}
+    else{url = `https://vidsrc.to/embed/tv/${id}`}
     const videoMainContainer = document.getElementById('moviePlayer')
-    videoMainContainer.style.height = '75%'
+    videoMainContainer.style.height = '80%'
     const mainContainer = document.getElementById('movieCards');
     mainContainer.innerHTML = ''
     mainContainer.style.margin = '0px'
     const videoDivContainer = document.createElement('div')
     videoDivContainer.className = "justify-content-center"
-    videoDivContainer.style.height = '75%'
     videoDivContainer.style.width = '100%'
+    videoDivContainer.style.height = '100%'
     const newDiv = document.createElement('div')
     newDiv.className = 'embed-responsive'
     const frame = document.createElement('iframe')
+    const darkmode = document.getElementById('darkmodeContainer');
+    darkmode.style.display = 'none'
     frame.src = url
     frame.id = 'videoPlayer'
+    frame.allowFullscreen = true
     videoDivContainer.appendChild(newDiv)
     newDiv.appendChild(frame)
     videoMainContainer.appendChild(videoDivContainer)
@@ -126,7 +139,8 @@ btnClick.addEventListener('click', async () => {
         const data = await getSearch();
         const movieData = await searchResults(data)
         createCard(movieData)
-        alert('please note that this will not work, removed API key due to rate limit.')
+        const darkmode = document.getElementById('darkmodeContainer');
+        darkmode.style.display = 'inline-block'
 });
 
 async function latestMovies() { // Explicitly include API key parameter
@@ -165,14 +179,15 @@ async function latestMovies() { // Explicitly include API key parameter
   }
 
 
-const LatestBtnClick = document.getElementById('Latest');
-LatestBtnClick.addEventListener('click', async () => {
-        const clearFunc0 = document.getElementById('moviePlayer')
-        clearFunc0.innerHTML = ''
-        clearFunc0.style.height = ''
-        const latestHeader = document.getElementById('latestHeader')
-        latestHeader.innerText = 'Latest Releases'
-        const movieData0 = await latestMovies()
-        createCard(movieData0)
-        alert('please note that this will not work, removed API key due to rate limit.')
-});
+window.onload= async () => {
+
+    const clearFunc0 = document.getElementById('moviePlayer')
+    clearFunc0.innerHTML = ''
+    clearFunc0.style.height = ''
+    const latestHeader = document.getElementById('latestHeader')
+    latestHeader.innerText = 'Latest Releases'
+    const movieData0 = await latestMovies()
+    createCard(movieData0)
+
+}
+

@@ -9,38 +9,96 @@
     />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+    <title>Movie Site</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./style.css" />
   </head>
+  <style>
+
+
+      #borderTop {
+        background-color: #17a5bb;
+        border-radius: 0px 0px 30px 30px;
+        box-shadow: 3px 3px 20px 5px #107786a6;
+        border-color: transparent;
+        margin-bottom: 20px;
+      
+      }
+
+      #banner {
+        border-bottom: 20px;
+        
+      }
+
+      #containerSearch{
+
+        max-width: 75vw;
+
+      }
+
+
+  </style>
   <body>
-    <div class="container mt-2 mb-5" id="searchBox">
-      <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary" type="button" id="Latest">
-          New Films
-        </button>
 
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="darkModeButton"
-        >
-          Theme
-        </button>
+    <div class="list-group" id="bannerParent">
+      <div
+        id="borderTop"
+        class="list-group-item list-group-item-action flex-column align-items-start active"
+      >
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Used to develop:</h5>
+          </div>
+          <p class="mb-1">HTML, CSS, Javascript, Boostrap Libary</p>
+          <p class="mb-1" style="font-size: 12px">
+            Hosted on my own domain - cloudflare protected. DNS setup for my SMTP
+            server along with relevant DNS records for the internet. SSL
+            certified.<br /><br /><b
+              >Email me on: shaunmurphyy@shaunmurphyy.co.uk</b
+              >
+          </p>
+        </div>
+    </div>
 
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Movie name"
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-          id="movieSearch"
-        />
-        <button class="btn btn-outline-secondary" type="button" id="searchBtn">
-          Search
-        </button>
+    <div class="containter mx-auto" id="containerSearch">
+
+      <div class="row justify-content-center mx-auto">
+     
+
+        <div class="container mt-2 mb-2" id="searchBox">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Movie name"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+              id="movieSearch"
+            />
+
+            <select class="form-select" aria-label="Default select example" style="max-width: 20%;" id="choice">
+              <option value="movie" selected>Movie</option>
+              <option value="tv" >TV Show</option>
+            </select>
+
+            <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+              Search
+            </button>
+          </div>
+        </div>
       </div>
+
+      <div class="row mx-3" id="darkmodeContainer">
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="darkModeButton" checked>
+          <label class="form-check-label" for="darkModeButton">Dark Mode?</label>
+        </div>
+        
+
+
+      </div>
+
     </div>
     <h1 class="d-flex justify-content-center" id="latestHeader"></h1>
     <div id="movieCards"></div>
