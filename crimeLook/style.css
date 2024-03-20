@@ -19,3 +19,9 @@ body{
     box-shadow: 3px 3px 20px 5px #107786a6;
     border-color: transparent;
 }
+
+#badge{
+
+    border-color: aqua !important;
+
+}
