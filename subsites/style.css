@@ -1,0 +1,36 @@
+html,
+body {
+  width: 100%;
+  height: 95%;
+  margin: 0px;
+}
+
+.singleCard:hover {
+  opacity: 0.5;
+}
+
+#cardHovers {
+  overflow: hidden;
+}
+
+#movieCard {
+  overflow: hidden;
+}
+
+.card {
+  height: 400px;
+  width: 200px;
+  margin: 10px;
+}
+
+.embed-responsive {
+  width: 100%;
+  height: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#videoPlayer {
+  height: 100%;
+  width: 100%;
+}
