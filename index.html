@@ -1,1 +1,935 @@
-<!doctype html><html lang="en" data-bs-theme="dark"><head><meta name="google-adsense-account" content="ca-pub-3159480402172985"><script async src="https://fundingchoicesmessages.google.com/i/pub-3159480402172985?ers=1" nonce="7O4h4gJ8Ajxjx3CarCYDkw"></script><script nonce="7O4h4gJ8Ajxjx3CarCYDkw">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3159480402172985"crossorigin="anonymous"></script><meta charset="utf-8"/><link rel="icon" href="./favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="./logo192.png"/><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"><link rel="manifest" href="./manifest.json"/><title>Shaun Murphy</title><script defer="defer" src="./static/js/main.7e963a0f.js"></script><link href="./static/css/main.eb518a9a.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body></html>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111318" />
+    <meta
+      name="description"
+      content="Shaun Murphy's web development playground, projects, qualifications and technical experience."
+    />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./logo192.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <title>Shaun Murphy</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+      :root {
+        --bg: #101217;
+        --panel: rgba(255, 255, 255, 0.075);
+        --panel-strong: rgba(255, 255, 255, 0.12);
+        --text: #f7f7f2;
+        --muted: #bfc4ca;
+        --line: rgba(255, 255, 255, 0.15);
+        --cyan: #3ad6d0;
+        --coral: #ff7058;
+        --gold: #f2c14e;
+        --green: #79d483;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        background:
+          linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 19%),
+          radial-gradient(circle at 12% 16%, rgba(58, 214, 208, 0.24), transparent 28rem),
+          radial-gradient(circle at 90% 12%, rgba(255, 112, 88, 0.17), transparent 24rem),
+          linear-gradient(140deg, #101217 0%, #1a1d24 54%, #12151b 100%);
+        color: var(--text);
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(90deg, transparent, rgba(58, 214, 208, 0.06), transparent),
+          linear-gradient(140deg, transparent 20%, rgba(242, 193, 78, 0.05), transparent 48%);
+        background-size: 260% 260%;
+        animation: atmosphere 16s ease-in-out infinite alternate;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        width: 100%;
+        height: 3px;
+        transform-origin: left;
+        transform: scaleX(0);
+        background: linear-gradient(90deg, var(--cyan), var(--gold), var(--coral));
+        box-shadow: 0 0 18px rgba(58, 214, 208, 0.55);
+      }
+
+      .site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: rgba(16, 18, 23, 0.82);
+        backdrop-filter: blur(16px);
+      }
+
+      .site-nav a {
+        transition: color 180ms ease, opacity 180ms ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--cyan) !important;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(58, 214, 208, 0.25), rgba(255, 112, 88, 0.24));
+        font-weight: 800;
+        box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.08), 0 0 28px rgba(58, 214, 208, 0.1);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 92vh;
+        display: grid;
+        align-items: center;
+        padding: 6rem 0 4rem;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.18;
+        background-image: linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 54px 54px;
+        mask-image: linear-gradient(to bottom, #000, transparent 85%);
+        pointer-events: none;
+      }
+
+      .hero-title {
+        max-width: 860px;
+        font-size: clamp(3rem, 8vw, 7.5rem);
+        line-height: 0.92;
+        letter-spacing: 0;
+        font-weight: 800;
+      }
+
+      .hero-title span {
+        color: transparent;
+        background: linear-gradient(90deg, var(--cyan), var(--gold), var(--coral), var(--cyan));
+        background-size: 240% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: textSweep 8s linear infinite;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.25rem);
+      }
+
+      .hero-media {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+        transform: rotate(-1.5deg);
+        animation: floatIn 900ms ease both;
+      }
+
+      .hero-stack {
+        position: relative;
+      }
+
+      .hero-media img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+        filter: saturate(1.12) contrast(1.08);
+      }
+
+      .hero-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.46));
+      }
+
+      .console-card {
+        position: absolute;
+        right: -1.25rem;
+        bottom: -2.1rem;
+        width: min(360px, 88%);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(12, 14, 19, 0.88);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(18px);
+        animation: consoleLift 1s 260ms ease both;
+      }
+
+      .console-top {
+        display: flex;
+        gap: 0.4rem;
+        padding: 0.75rem 0.85rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .console-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: var(--coral);
+      }
+
+      .console-dot:nth-child(2) {
+        background: var(--gold);
+      }
+
+      .console-dot:nth-child(3) {
+        background: var(--cyan);
+      }
+
+      .console-lines {
+        display: grid;
+        gap: 0.45rem;
+        padding: 0.95rem;
+        color: var(--muted);
+        font-family: "Courier New", monospace;
+        font-size: 0.82rem;
+      }
+
+      .console-lines span {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: typeLine 900ms steps(38, end) both;
+      }
+
+      .console-lines span:nth-child(2) {
+        animation-delay: 420ms;
+      }
+
+      .console-lines span:nth-child(3) {
+        animation-delay: 820ms;
+      }
+
+      .stat-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--line);
+      }
+
+      .stat-strip div {
+        position: relative;
+        overflow: hidden;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.07);
+      }
+
+      .stat-strip div::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        translate: -120% 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+        animation: sheen 5.5s ease-in-out infinite;
+      }
+
+      .stat-strip b {
+        display: block;
+        font-size: 1.45rem;
+      }
+
+      .stat-strip span {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .section {
+        padding: 5rem 0;
+      }
+
+      .tech-ribbon {
+        overflow: hidden;
+        border-block: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .tech-track {
+        display: flex;
+        width: max-content;
+        gap: 0;
+        padding: 1rem 0;
+        animation: marquee 26s linear infinite;
+      }
+
+      .tech-group {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
+      .tech-track span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.5rem 0.9rem;
+        background: rgba(255, 255, 255, 0.065);
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .section-title {
+        max-width: 720px;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1;
+        font-weight: 800;
+      }
+
+      .section-kicker {
+        color: var(--cyan);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.78rem;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .project-card {
+        min-height: 420px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #16191f;
+        text-decoration: none;
+        transform: translateY(26px);
+        opacity: 0;
+        transform-style: preserve-3d;
+        transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+      }
+
+      .project-card.is-visible {
+        animation: rise 650ms ease forwards;
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(58, 214, 208, 0.65);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(58, 214, 208, 0.1);
+      }
+
+      .project-card img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        object-fit: cover;
+        filter: saturate(1.08) brightness(0.78);
+        transition: transform 500ms ease, filter 500ms ease;
+      }
+
+      .project-card:hover img {
+        transform: scale(1.06);
+        filter: saturate(1.2) brightness(0.92);
+      }
+
+      .project-card .content {
+        position: absolute;
+        inset: auto 0 0;
+        padding: 1.25rem;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        transform: translateZ(28px);
+      }
+
+      .tag {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.28rem 0.65rem;
+        margin-bottom: 0.7rem;
+        background: rgba(0, 0, 0, 0.34);
+        color: #fff;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .skill-band {
+        background: rgba(255, 255, 255, 0.055);
+        border-block: 1px solid var(--line);
+      }
+
+      .skill-pill {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0.9rem 1rem;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .skill-pill:hover {
+        transform: translateY(-3px);
+        border-color: rgba(58, 214, 208, 0.55);
+        background: rgba(58, 214, 208, 0.09);
+      }
+
+      .profile-section {
+        border-block: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .impact-grid,
+      .qualification-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .impact-card,
+      .qualification-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 150px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 1.1rem;
+        background: rgba(255, 255, 255, 0.065);
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .impact-card::before,
+      .qualification-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-top: 2px solid rgba(58, 214, 208, 0.5);
+        opacity: 0;
+        transition: opacity 180ms ease;
+      }
+
+      .impact-card:hover,
+      .qualification-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(58, 214, 208, 0.5);
+        background: rgba(255, 255, 255, 0.085);
+      }
+
+      .impact-card:hover::before,
+      .qualification-card:hover::before {
+        opacity: 1;
+      }
+
+      .impact-card strong,
+      .qualification-card strong {
+        display: block;
+        color: var(--text);
+        font-size: 1.1rem;
+      }
+
+      .impact-card span,
+      .qualification-card span {
+        display: block;
+        margin-top: 0.55rem;
+        color: var(--muted);
+      }
+
+      .qualification-card {
+        min-height: 130px;
+      }
+
+      .qualification-card span {
+        margin-top: 0;
+        margin-bottom: 0.55rem;
+        color: var(--cyan);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cert-row img {
+        width: 100%;
+        max-height: 230px;
+        object-fit: contain;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        background:
+          linear-gradient(90deg, rgba(58, 214, 208, 0.08), transparent 35%, rgba(255, 112, 88, 0.08)),
+          rgba(0, 0, 0, 0.22);
+      }
+
+      .btn-lift {
+        border-radius: 8px;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .btn-lift:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 40px rgba(58, 214, 208, 0.18);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      .reveal.is-visible {
+        animation: rise 650ms ease forwards;
+      }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(24px) rotate(-1.5deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) rotate(-1.5deg);
+        }
+      }
+
+      @keyframes atmosphere {
+        from {
+          background-position: 0% 50%;
+        }
+        to {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes textSweep {
+        to {
+          background-position: 240% center;
+        }
+      }
+
+      @keyframes consoleLift {
+        from {
+          opacity: 0;
+          transform: translateY(24px) rotate(1deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) rotate(1deg);
+        }
+      }
+
+      @keyframes typeLine {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes sheen {
+        0%,
+        55% {
+          translate: -120% 0;
+        }
+        72%,
+        100% {
+          translate: 120% 0;
+        }
+      }
+
+      @keyframes marquee {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      @media (max-width: 991px) {
+        .hero {
+          min-height: auto;
+          padding-top: 4rem;
+        }
+
+        .hero-media {
+          margin-top: 2rem;
+          transform: none;
+        }
+
+        .console-card {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          width: 100%;
+          margin-top: 1rem;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .impact-grid,
+        .qualification-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-card {
+          min-height: 340px;
+        }
+      }
+
+      @media (max-width: 575px) {
+        .stat-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .section {
+          padding: 3.5rem 0;
+        }
+
+        .tech-track {
+          animation-duration: 18s;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <nav class="site-nav">
+      <div class="container d-flex align-items-center justify-content-between py-3">
+        <a class="d-flex align-items-center gap-2 text-decoration-none" href="#">
+          <span class="brand-mark">SM</span>
+          <strong>Shaun Murphy</strong>
+        </a>
+        <div class="d-none d-md-flex align-items-center gap-4">
+          <a class="text-decoration-none text-secondary-emphasis" href="#projects">Projects</a>
+          <a class="text-decoration-none text-secondary-emphasis" href="#skills">Skills</a>
+          <a class="text-decoration-none text-secondary-emphasis" href="#qualifications">Qualifications</a>
+          <a class="text-decoration-none text-secondary-emphasis" href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="container position-relative">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+              <p class="section-kicker mb-3 reveal">Web development playground</p>
+              <h1 class="hero-title reveal">Building sharper little web things, <span>one experiment at a time.</span></h1>
+              <p class="hero-copy mt-4 reveal">
+                IT engineer and developer with 5+ years across infrastructure, cloud, automation and full-stack web projects.
+              </p>
+              <div class="d-flex flex-wrap gap-3 mt-4 reveal">
+                <a class="btn btn-info btn-lg btn-lift fw-semibold" href="./movieFolder/index.html">Open Movie Site</a>
+                <a class="btn btn-outline-light btn-lg btn-lift" href="#projects">View Projects</a>
+              </div>
+              <div class="stat-strip mt-5 reveal">
+                <div><b>5+</b><span>Years in IT and development</span></div>
+                <div><b>Cloud</b><span>Azure and hybrid environments</span></div>
+                <div><b>Code</b><span>Automation and full-stack builds</span></div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="hero-stack">
+                <div class="hero-media">
+                  <img src="./img/banner.png" alt="Abstract development workspace banner" />
+                </div>
+                <div class="console-card" aria-label="Automation highlights">
+                  <div class="console-top">
+                    <span class="console-dot"></span>
+                    <span class="console-dot"></span>
+                    <span class="console-dot"></span>
+                  </div>
+                  <div class="console-lines">
+                    <span>&gt; diagnose infrastructure faults</span>
+                    <span>&gt; automate repeatable support work</span>
+                    <span>&gt; build web tools around real problems</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tech-ribbon" aria-label="Technical capabilities">
+        <div class="tech-track">
+          <div class="tech-group">
+            <span>Azure</span>
+            <span>PowerShell</span>
+            <span>Python</span>
+            <span>Linux</span>
+            <span>Windows Server</span>
+            <span>Hyper-V</span>
+            <span>REST APIs</span>
+            <span>SQL</span>
+            <span>NGINX</span>
+            <span>Microsoft 365</span>
+            <span>Cloudflare</span>
+            <span>Automation</span>
+          </div>
+          <div class="tech-group" aria-hidden="true">
+            <span>Azure</span>
+            <span>PowerShell</span>
+            <span>Python</span>
+            <span>Linux</span>
+            <span>Windows Server</span>
+            <span>Hyper-V</span>
+            <span>REST APIs</span>
+            <span>SQL</span>
+            <span>NGINX</span>
+            <span>Microsoft 365</span>
+            <span>Cloudflare</span>
+            <span>Automation</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section profile-section" id="profile">
+        <div class="container">
+          <div class="row g-4 align-items-start">
+            <div class="col-lg-5">
+              <p class="section-kicker reveal">Professional profile</p>
+              <h2 class="section-title reveal">Infrastructure thinking with developer hands.</h2>
+            </div>
+            <div class="col-lg-7">
+              <p class="hero-copy mt-0 reveal">
+                I diagnose complex systems, automate repetitive work, and build practical software around real operational problems. My background spans Windows and Linux servers, virtualisation, Microsoft 365, Azure, networking, APIs and database-backed applications.
+              </p>
+              <div class="impact-grid mt-4">
+                <div class="impact-card reveal">
+                  <strong>Infrastructure</strong>
+                  <span>Windows Server, Linux, Active Directory, DNS, DHCP, Hyper-V, NGINX and Cloudflare.</span>
+                </div>
+                <div class="impact-card reveal">
+                  <strong>Automation</strong>
+                  <span>PowerShell and Python tooling for monitoring, backups, support workflows and operational efficiency.</span>
+                </div>
+                <div class="impact-card reveal">
+                  <strong>Development</strong>
+                  <span>Full-stack web applications, REST and SOAP APIs, SQL databases and mobile app deployment.</span>
+                </div>
+                <div class="impact-card reveal">
+                  <strong>Cloud</strong>
+                  <span>Azure environments, Microsoft 365 administration, Exchange, Teams and scalable system design.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <p class="section-kicker reveal">Featured work</p>
+          <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+            <h2 class="section-title reveal">Projects with a clearer direction.</h2>
+            <p class="hero-copy align-self-lg-end reveal">
+              The project list now focuses on the pieces worth showing: media search, automation-minded builds and security learning.
+            </p>
+          </div>
+          <div class="project-grid">
+            <a class="project-card" href="./movieFolder/index.html">
+              <img src="./img/movies.png" alt="Movie browsing project preview" />
+              <div class="content">
+                <span class="tag">Movie Site</span>
+                <h3>Search films and shows with a cleaner cinematic interface.</h3>
+                <p class="mb-0 text-secondary-emphasis">Latest releases, richer cards, loading states and a better viewing surface.</p>
+              </div>
+            </a>
+            <a class="project-card" href="#skills">
+              <img src="./img/thmRooms.png" alt="TryHackMe progress preview" />
+              <div class="content">
+                <span class="tag">Security</span>
+                <h3>Hands-on TryHackMe learning and challenge notes.</h3>
+                <p class="mb-0 text-secondary-emphasis">Reconnaissance, enumeration, web app testing and practical defensive thinking.</p>
+              </div>
+            </a>
+            <a class="project-card" href="#qualifications">
+              <img src="./img/complete.png" alt="Certification preview" />
+              <div class="content">
+                <span class="tag">Certifications</span>
+                <h3>Training milestones and technical foundations.</h3>
+                <p class="mb-0 text-secondary-emphasis">A cleaner space for completed learning without the noisy legacy demos.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section skill-band" id="skills">
+        <div class="container">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-5">
+              <p class="section-kicker reveal">Current stack</p>
+              <h2 class="section-title reveal">Tools I use to solve the awkward bits.</h2>
+            </div>
+            <div class="col-lg-7">
+              <div class="row g-3">
+                <div class="col-sm-6 reveal"><div class="skill-pill">Azure and Microsoft 365</div></div>
+                <div class="col-sm-6 reveal"><div class="skill-pill">Hyper-V and virtualisation</div></div>
+                <div class="col-sm-6 reveal"><div class="skill-pill">Active Directory, DNS and DHCP</div></div>
+                <div class="col-sm-6 reveal"><div class="skill-pill">PowerShell and Python automation</div></div>
+                <div class="col-sm-6 reveal"><div class="skill-pill">REST, SOAP and SQL databases</div></div>
+                <div class="col-sm-6 reveal"><div class="skill-pill">PyTorch and TensorFlow learning</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="qualifications">
+        <div class="container">
+          <p class="section-kicker reveal">Qualifications</p>
+          <h2 class="section-title reveal">Certified foundations, backed by hands-on work.</h2>
+          <div class="qualification-grid mt-4">
+            <div class="qualification-card reveal">
+              <span>Infrastructure</span>
+              <strong>Level 3 Network Infrastructure</strong>
+            </div>
+            <div class="qualification-card reveal">
+              <span>Microsoft Technology Associate</span>
+              <strong>Cloud Fundamentals</strong>
+            </div>
+            <div class="qualification-card reveal">
+              <span>Microsoft Technology Associate</span>
+              <strong>Networking Fundamentals</strong>
+            </div>
+            <div class="qualification-card reveal">
+              <span>Microsoft Technology Associate</span>
+              <strong>Devices and Mobility</strong>
+            </div>
+            <div class="qualification-card reveal">
+              <span>Development</span>
+              <strong>Coding and Logic</strong>
+            </div>
+          </div>
+          <div class="row g-3 mt-4 cert-row">
+            <div class="col-md-4 reveal"><img src="./img/network.png" alt="Networking qualification preview" /></div>
+            <div class="col-md-4 reveal"><img src="./img/cloud.png" alt="Cloud qualification preview" /></div>
+            <div class="col-md-4 reveal"><img src="./img/coding.png" alt="Coding qualification preview" /></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer py-5" id="contact">
+      <div class="container d-flex flex-column flex-md-row justify-content-between gap-3">
+        <div>
+          <h2 class="h4">Contact</h2>
+          <p class="mb-0 text-secondary-emphasis">Always open to feedback, ideas and better ways to build.</p>
+        </div>
+        <div class="d-flex gap-3 align-items-center">
+          <a href="mailto:smurphy0302@outlook.com">Email</a>
+          <a href="https://www.linkedin.com/in/ogmurphs/">LinkedIn</a>
+          <a href="https://github.com/ShaunMurphy21">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      document.querySelectorAll(".reveal, .project-card").forEach((element, index) => {
+        element.style.animationDelay = `${Math.min(index * 70, 420)}ms`;
+        observer.observe(element);
+      });
+
+      const progress = document.getElementById("scrollProgress");
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const progressAmount = scrollable > 0 ? window.scrollY / scrollable : 0;
+        progress.style.transform = `scaleX(${progressAmount})`;
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          if (window.matchMedia("(max-width: 991px)").matches) return;
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `translateY(-6px) rotateX(${-y * 5}deg) rotateY(${x * 7}deg)`;
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.transform = "";
+        });
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
