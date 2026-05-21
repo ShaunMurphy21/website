@@ -501,7 +501,7 @@
 
       .project-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(220px, 1fr));
         gap: 1rem;
       }
 
@@ -979,7 +979,16 @@
         }
 
         .project-grid {
-          grid-template-columns: 1fr;
+          display: flex;
+          overflow-x: auto;
+          padding-bottom: 0.75rem;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: thin;
+        }
+
+        .project-card {
+          flex: 0 0 min(82vw, 330px);
+          scroll-snap-align: start;
         }
 
         .impact-grid,
@@ -1298,6 +1307,22 @@
                 <span class="tag">Certifications</span>
                 <h3>Training milestones and technical foundations.</h3>
                 <p class="mb-0 text-secondary-emphasis">A cleaner space for completed learning without the noisy legacy demos.</p>
+              </div>
+            </a>
+            <a class="project-card" href="https://github.com/ShaunMurphy21/python-lgwebosTV-control" target="_blank" rel="noopener noreferrer">
+              <img src="./img/webos-tv-control.png" alt="Python webOS TV control project preview" />
+              <div class="content">
+                <span class="tag">Python Automation</span>
+                <h3>Voice and hotkey control for older webOS TVs.</h3>
+                <p class="mb-0 text-secondary-emphasis">A Python remote-control tool using webOS system, media, input and source commands.</p>
+              </div>
+            </a>
+            <a class="project-card" href="https://github.com/ShaunMurphy21/Powershell-Scripts" target="_blank" rel="noopener noreferrer">
+              <img src="./img/powershell-scripts.png" alt="PowerShell scripts automation project preview" />
+              <div class="content">
+                <span class="tag">PowerShell</span>
+                <h3>Automation scripts for support and infrastructure tasks.</h3>
+                <p class="mb-0 text-secondary-emphasis">A practical collection for repeatable administration, diagnostics and operational workflow improvements.</p>
               </div>
             </a>
           </div>
