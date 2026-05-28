@@ -86,6 +86,54 @@
             <option value="title">Title A-Z</option>
           </select>
         </div>
+
+        <div class="playback-panel" aria-label="VSEmbed playback options">
+          <label class="visually-hidden" for="subtitleUrl">Subtitle URL</label>
+          <input
+            type="url"
+            class="form-control"
+            placeholder="Subtitle .srt or .vtt URL"
+            aria-label="Subtitle URL"
+            id="subtitleUrl"
+          />
+          <label class="visually-hidden" for="subtitleLang">Subtitle language</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Sub lang"
+            aria-label="Default subtitle language"
+            id="subtitleLang"
+            maxlength="8"
+          />
+          <label class="visually-hidden" for="seasonNumber">Season</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Season"
+            aria-label="Episode season number"
+            id="seasonNumber"
+            min="1"
+          />
+          <label class="visually-hidden" for="episodeNumber">Episode</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Episode"
+            aria-label="Episode number"
+            id="episodeNumber"
+            min="1"
+          />
+          <div class="playback-switches">
+            <label class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="autoplayToggle" checked />
+              <span class="form-check-label">Autoplay</span>
+            </label>
+            <label class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="autonextToggle" />
+              <span class="form-check-label">Auto-next</span>
+            </label>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -101,10 +149,8 @@
       </section>
 
       <section class="browse-tabs" aria-label="Browse categories">
-        <button class="btn btn-info btn-sm" type="button" data-browse="movie:new">Latest Movies</button>
-        <button class="btn btn-outline-light btn-sm" type="button" data-browse="movie:add">Recently Added Movies</button>
-        <button class="btn btn-outline-light btn-sm" type="button" data-browse="tv:new">Latest TV</button>
-        <button class="btn btn-outline-light btn-sm" type="button" data-browse="tv:add">Recently Added TV</button>
+        <button class="btn btn-info btn-sm" type="button" data-browse="movie:latest">Latest Movies</button>
+        <button class="btn btn-outline-light btn-sm" type="button" data-browse="tv:latest">Latest TV Shows</button>
         <button class="btn btn-outline-light btn-sm" type="button" data-browse="episode:latest">Latest Episodes</button>
       </section>
 

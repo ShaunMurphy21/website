@@ -7,6 +7,12 @@ const yearInput = document.getElementById("yearFilter");
 const typeSelect = document.getElementById("choice");
 const genreSelect = document.getElementById("genreFilter");
 const sortSelect = document.getElementById("sortFilter");
+const subtitleUrlInput = document.getElementById("subtitleUrl");
+const subtitleLangInput = document.getElementById("subtitleLang");
+const seasonInput = document.getElementById("seasonNumber");
+const episodeInput = document.getElementById("episodeNumber");
+const autoplayToggle = document.getElementById("autoplayToggle");
+const autonextToggle = document.getElementById("autonextToggle");
 const cardsContainer = document.getElementById("movieCards");
 const playerContainer = document.getElementById("moviePlayer");
 const titleElement = document.getElementById("latestHeader");
@@ -17,37 +23,22 @@ const sourceControls = document.getElementById("sourceControls");
 const loadMoreButton = document.getElementById("loadMoreBtn");
 const browseButtons = document.querySelectorAll("[data-browse]");
 
-const embedSources = [
-  {
-    name: "VidSrc",
-    buildUrl: (movie) => buildEmbedUrl("https://vidsrc.to/embed", movie),
-  },
-  {
-    name: "VidSrc CC",
-    buildUrl: (movie) => `${buildEmbedUrl("https://vidsrc.cc/v2/embed", movie)}?autoPlay=false`,
-  },
-  {
-    name: "VidSrc FYI",
-    buildUrl: (movie) => buildEmbedUrl("https://vidsrc.fyi/embed", movie),
-  },
-  {
-    name: "VidSrc MOV",
-    buildUrl: (movie) => buildEmbedUrl("https://vidsrc.mov/embed", movie),
-  },
-];
+const vsembedDomains = ["https://vidsrc-embed.ru", "https://vidsrc-embed.su", "https://vidsrcme.su", "https://vsrc.su"];
+const embedSources = vsembedDomains.map((domain) => ({
+  name: new URL(domain).hostname,
+  buildUrl: (movie) => buildVsembedEmbedUrl(domain, movie),
+}));
 
 const browseLabels = {
-  "movie:new": ["Latest Movies", "New movie releases"],
-  "movie:add": ["Recently Added Movies", "Freshly indexed movies"],
-  "tv:new": ["Latest TV", "New TV releases"],
-  "tv:add": ["Recently Added TV", "Freshly indexed shows"],
+  "movie:latest": ["Latest Movies", "Recently added movies"],
+  "tv:latest": ["Latest TV Shows", "Recently added TV shows"],
   "episode:latest": ["Latest Episodes", "Recently added episodes"],
 };
 
-const latestReleaseProviders = ["https://vidsrc.to", "https://vidsrc.fyi", "https://vidsrc.mov"];
+const latestReleaseProviders = [...vsembedDomains];
 const detailCache = new Map();
 const fallbackBrowseLists = {
-  "movie:new": [
+  "movie:latest": [
     { imdbID: "tt16366836", Title: "Venom: The Last Dance", Year: "2024", Type: "movie" },
     { imdbID: "tt6263850", Title: "Deadpool & Wolverine", Year: "2024", Type: "movie" },
     { imdbID: "tt15239678", Title: "Dune: Part Two", Year: "2024", Type: "movie" },
@@ -55,29 +46,13 @@ const fallbackBrowseLists = {
     { imdbID: "tt12037194", Title: "Furiosa: A Mad Max Saga", Year: "2024", Type: "movie" },
     { imdbID: "tt14539740", Title: "Godzilla x Kong: The New Empire", Year: "2024", Type: "movie" },
   ],
-  "movie:add": [
-    { imdbID: "tt6718170", Title: "The Super Mario Bros. Movie", Year: "2023", Type: "movie" },
-    { imdbID: "tt9362722", Title: "Spider-Man: Across the Spider-Verse", Year: "2023", Type: "movie" },
-    { imdbID: "tt1517268", Title: "Barbie", Year: "2023", Type: "movie" },
-    { imdbID: "tt15398776", Title: "Oppenheimer", Year: "2023", Type: "movie" },
-    { imdbID: "tt1745960", Title: "Top Gun: Maverick", Year: "2022", Type: "movie" },
-    { imdbID: "tt1877830", Title: "The Batman", Year: "2022", Type: "movie" },
-  ],
-  "tv:new": [
+  "tv:latest": [
     { imdbID: "tt0944947", Title: "Game of Thrones", Year: "2011", Type: "tv" },
     { imdbID: "tt11198330", Title: "House of the Dragon", Year: "2022", Type: "tv" },
     { imdbID: "tt3581920", Title: "The Last of Us", Year: "2023", Type: "tv" },
     { imdbID: "tt11280740", Title: "Severance", Year: "2022", Type: "tv" },
     { imdbID: "tt13622776", Title: "The Bear", Year: "2022", Type: "tv" },
     { imdbID: "tt1405406", Title: "The Mandalorian", Year: "2019", Type: "tv" },
-  ],
-  "tv:add": [
-    { imdbID: "tt4574334", Title: "Stranger Things", Year: "2016", Type: "tv" },
-    { imdbID: "tt0903747", Title: "Breaking Bad", Year: "2008", Type: "tv" },
-    { imdbID: "tt2861424", Title: "Rick and Morty", Year: "2013", Type: "tv" },
-    { imdbID: "tt1190634", Title: "The Boys", Year: "2019", Type: "tv" },
-    { imdbID: "tt3032476", Title: "Better Call Saul", Year: "2015", Type: "tv" },
-    { imdbID: "tt7366338", Title: "Chernobyl", Year: "2019", Type: "tv" },
   ],
   "episode:latest": [
     { imdbID: "tt0944947", Title: "Game of Thrones S1 E1", Year: "2011", Type: "episode", Season: "1", Episode: "1" },
@@ -92,7 +67,7 @@ const fallbackBrowseLists = {
 let lastResults = [];
 let lastTitle = "Latest Releases";
 let lastEyebrow = "New movie releases";
-let activeBrowse = { contentType: "movie", listType: "new", page: 1 };
+let activeBrowse = { contentType: "movie", listType: "latest", page: 1 };
 let lastMode = "browse";
 let lastSearchQuery = "";
 let isLoading = false;
@@ -120,16 +95,58 @@ async function fetchJson(url) {
   return response.json();
 }
 
-function buildEmbedUrl(baseUrl, movie) {
-  if (movie.Type === "episode" && movie.Season && movie.Episode) {
-    return `${baseUrl}/tv/${movie.imdbID}/${movie.Season}/${movie.Episode}`;
+function getMediaId(movie) {
+  return movie.tmdbID || movie.imdbID;
+}
+
+function getEpisodeParts(movie) {
+  return {
+    season: movie.Season || seasonInput.value.trim(),
+    episode: movie.Episode || episodeInput.value.trim(),
+  };
+}
+
+function buildVsembedEmbedUrl(domain, movie) {
+  const mediaId = getMediaId(movie);
+  const { season, episode } = getEpisodeParts(movie);
+  const shouldLoadEpisode = movie.Type === "episode" || (season && episode);
+  const encodedId = encodeURIComponent(mediaId);
+  const params = new URLSearchParams();
+
+  if (subtitleLangInput.value.trim()) {
+    params.set("ds_lang", subtitleLangInput.value.trim());
   }
 
-  return `${baseUrl}/${movie.Type === "movie" ? "movie" : "tv"}/${movie.imdbID}`;
+  if (subtitleUrlInput.value.trim() && (movie.Type === "movie" || shouldLoadEpisode)) {
+    params.set("sub_url", subtitleUrlInput.value.trim());
+  }
+
+  if (movie.Type === "movie" || shouldLoadEpisode) {
+    params.set("autoplay", autoplayToggle.checked ? "1" : "0");
+  }
+
+  if (shouldLoadEpisode) {
+    params.set("autonext", autonextToggle.checked ? "1" : "0");
+  }
+
+  let url = movie.Type === "movie" ? `${domain}/embed/movie/${encodedId}` : `${domain}/embed/tv/${encodedId}`;
+
+  if (shouldLoadEpisode && season && episode) {
+    url = `${domain}/embed/tv/${encodedId}/${encodeURIComponent(season)}-${encodeURIComponent(episode)}`;
+  }
+
+  const queryString = params.toString();
+  return queryString ? `${url}?${queryString}` : url;
 }
 
 function parseImdbId(movie) {
-  return movie.imdbID || movie.imdb_id || movie.imdbId || movie.id;
+  const id = movie.imdbID || movie.imdb_id || movie.imdbId || movie.imdb || movie.id;
+  return String(id || "").startsWith("tt") ? String(id) : "";
+}
+
+function parseTmdbId(movie) {
+  const id = movie.tmdbID || movie.tmdb_id || movie.tmdbId || movie.tmdb || movie.id;
+  return id && !String(id).startsWith("tt") ? String(id) : "";
 }
 
 function parseTitle(movie) {
@@ -152,6 +169,7 @@ function normaliseMovie(movie, fallbackType) {
 
   return {
     imdbID: parseImdbId(movie),
+    tmdbID: parseTmdbId(movie),
     Title: parseTitle(movie),
     Year: parseYear(movie),
     Poster: normalisePoster(movie.Poster || movie.poster),
@@ -207,7 +225,7 @@ async function getOmdbDetails(movie) {
 }
 
 async function enrichMovies(movies) {
-  return Promise.all(movies.filter((movie) => movie.imdbID).map(getOmdbDetails));
+  return Promise.all(movies.filter((movie) => getMediaId(movie)).map(getOmdbDetails));
 }
 
 function filterAndSortMovies(movies) {
@@ -247,6 +265,24 @@ async function getSearch(page = 1) {
 
   if (!searchValue) {
     return [];
+  }
+
+  if (/^(tt\d+|\d+)$/.test(searchValue)) {
+    const isTmdb = /^\d+$/.test(searchValue);
+    const isEpisode = typeSelect.value === "tv" && seasonInput.value.trim() && episodeInput.value.trim();
+    const directMovie = normaliseMovie(
+      {
+        imdbID: isTmdb ? "" : searchValue,
+        tmdbID: isTmdb ? searchValue : "",
+        Title: `${isTmdb ? "TMDB" : "IMDb"} ${searchValue}`,
+        Type: isEpisode ? "episode" : typeSelect.value,
+        Season: seasonInput.value.trim(),
+        Episode: episodeInput.value.trim(),
+      },
+      isEpisode ? "episode" : typeSelect.value,
+    );
+
+    return enrichMovies([directMovie]);
   }
 
   const selectedType = typeSelect.value === "tv" ? "series" : "movie";
@@ -413,22 +449,24 @@ function extractListItems(data) {
 }
 
 async function fetchBrowseList(contentType, listType, page = 1) {
-  const basePath = contentType === "episode" ? "/vapi/episode/latest" : `/vapi/${contentType}/${listType}`;
-  const pathCandidates = page === 1 ? [basePath, `${basePath}/1`] : [`${basePath}/${page}`];
+  const feedPath =
+    contentType === "episode"
+      ? `/episodes/latest/page-${page}.json`
+      : contentType === "tv"
+        ? `/tvshows/latest/page-${page}.json`
+        : `/movies/latest/page-${page}.json`;
 
   for (const provider of latestReleaseProviders) {
-    for (const path of pathCandidates) {
-      try {
-        const data = await fetchJson(`${provider}${path}`);
-        const items = extractListItems(data);
+    try {
+      const data = await fetchJson(`${provider}${feedPath}`);
+      const items = extractListItems(data);
 
-        if (items.length) {
-          const fallbackType = contentType === "episode" ? "episode" : contentType;
-          return enrichMovies(items.map((movie) => normaliseMovie(movie, fallbackType)));
-        }
-      } catch (error) {
-        console.warn(`Browse list failed from ${provider}${path}`, error);
+      if (items.length) {
+        const fallbackType = contentType === "episode" ? "episode" : contentType;
+        return enrichMovies(items.map((movie) => normaliseMovie(movie, fallbackType)));
       }
+    } catch (error) {
+      console.warn(`Browse list failed from ${provider}${feedPath}`, error);
     }
   }
 
@@ -437,18 +475,18 @@ async function fetchBrowseList(contentType, listType, page = 1) {
 
 async function getFallbackBrowseList(contentType, listType) {
   const key = `${contentType}:${listType}`;
-  const fallbackItems = fallbackBrowseLists[key] || fallbackBrowseLists["movie:new"];
+  const fallbackItems = fallbackBrowseLists[key] || fallbackBrowseLists["movie:latest"];
   return enrichMovies(fallbackItems.map((movie) => normaliseMovie(movie, movie.Type)));
 }
 
-async function loadBrowse(contentType = "movie", listType = "new", page = 1, append = false) {
+async function loadBrowse(contentType = "movie", listType = "latest", page = 1, append = false) {
   if (isLoading) return;
   isLoading = true;
   lastMode = "browse";
   activeBrowse = { contentType, listType, page };
 
   const key = `${contentType}:${listType}`;
-  const [title, eyebrow] = browseLabels[key] || browseLabels["movie:new"];
+  const [title, eyebrow] = browseLabels[key] || browseLabels["movie:latest"];
   setHeader(title, eyebrow);
   setStatus(append ? "Loading more..." : "Loading titles...");
   loadMoreButton.disabled = true;
@@ -553,6 +591,6 @@ loadMoreButton.addEventListener("click", () => {
 form.addEventListener("submit", (event) => handleSearch(event, 1));
 
 window.addEventListener("load", () => {
-  setActiveBrowseButton("movie:new");
-  loadBrowse("movie", "new", 1);
+  setActiveBrowseButton("movie:latest");
+  loadBrowse("movie", "latest", 1);
 });
