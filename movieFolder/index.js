@@ -180,6 +180,15 @@ function normaliseMovie(movie, fallbackType) {
     imdbRating: movie.imdbRating || movie.rating || "",
     Runtime: movie.Runtime || movie.runtime || "",
     Plot: movie.Plot || movie.plot || "",
+    Actors: movie.Actors || movie.actors || "",
+    Director: movie.Director || movie.director || "",
+    Writer: movie.Writer || movie.writer || "",
+    Rated: movie.Rated || movie.rated || "",
+    Released: movie.Released || movie.released || "",
+    Language: movie.Language || movie.language || "",
+    Country: movie.Country || movie.country || "",
+    Awards: movie.Awards || movie.awards || "",
+    totalSeasons: movie.totalSeasons || movie.seasons || "",
   };
 }
 
@@ -206,6 +215,15 @@ async function getOmdbDetails(movie) {
       imdbRating: data.imdbRating && data.imdbRating !== "N/A" ? data.imdbRating : movie.imdbRating,
       Runtime: data.Runtime && data.Runtime !== "N/A" ? data.Runtime : movie.Runtime,
       Plot: data.Plot && data.Plot !== "N/A" ? data.Plot : movie.Plot,
+      Actors: data.Actors && data.Actors !== "N/A" ? data.Actors : movie.Actors,
+      Director: data.Director && data.Director !== "N/A" ? data.Director : movie.Director,
+      Writer: data.Writer && data.Writer !== "N/A" ? data.Writer : movie.Writer,
+      Rated: data.Rated && data.Rated !== "N/A" ? data.Rated : movie.Rated,
+      Released: data.Released && data.Released !== "N/A" ? data.Released : movie.Released,
+      Language: data.Language && data.Language !== "N/A" ? data.Language : movie.Language,
+      Country: data.Country && data.Country !== "N/A" ? data.Country : movie.Country,
+      Awards: data.Awards && data.Awards !== "N/A" ? data.Awards : movie.Awards,
+      totalSeasons: data.totalSeasons && data.totalSeasons !== "N/A" ? data.totalSeasons : movie.totalSeasons,
     };
 
     if (movie.Type === "episode") {
@@ -369,6 +387,7 @@ function renderCards(movieData, append = false) {
     backButton.hidden = true;
     sourceControls.hidden = true;
     sourceControls.innerHTML = "";
+    playerContainer.style.removeProperty("--player-backdrop");
   }
 
   const visibleMovies = filterAndSortMovies(movieData);
@@ -414,6 +433,101 @@ function embedVideo(movie) {
   playerContainer.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+function createMetaPill(label, value) {
+  if (!value) return null;
+
+  const pill = document.createElement("span");
+  pill.className = "meta-pill";
+  pill.textContent = label ? `${label} ${value}` : value;
+  return pill;
+}
+
+function createInfoRow(label, value) {
+  if (!value) return null;
+
+  const row = document.createElement("div");
+  row.className = "info-row";
+
+  const term = document.createElement("dt");
+  term.textContent = label;
+
+  const detail = document.createElement("dd");
+  detail.textContent = value;
+
+  row.appendChild(term);
+  row.appendChild(detail);
+  return row;
+}
+
+function createPlayerInfo(movie) {
+  const info = document.createElement("article");
+  info.className = "player-info";
+
+  const poster = document.createElement("img");
+  poster.className = "player-poster";
+  poster.src = normalisePoster(movie.Poster);
+  poster.alt = `${movie.Title} poster`;
+  poster.onerror = () => {
+    poster.src = placeholderPoster;
+  };
+
+  const body = document.createElement("div");
+  body.className = "player-info-body";
+
+  const type = document.createElement("p");
+  type.className = "kicker mb-2";
+  type.textContent = movie.Type === "episode" ? "Episode details" : movie.Type === "tv" ? "TV show details" : "Film details";
+
+  const title = document.createElement("h3");
+  title.textContent = movie.Title;
+
+  const meta = document.createElement("div");
+  meta.className = "player-meta";
+  [
+    createMetaPill("", movie.Year),
+    createMetaPill("", movie.Rated),
+    createMetaPill("", movie.Runtime),
+    createMetaPill("IMDb", movie.imdbRating),
+    movie.Type === "episode" && movie.Season && movie.Episode ? createMetaPill("", `S${movie.Season} E${movie.Episode}`) : null,
+    movie.Type === "tv" ? createMetaPill("Seasons", movie.totalSeasons) : null,
+  ]
+    .filter(Boolean)
+    .forEach((pill) => meta.appendChild(pill));
+
+  const plot = document.createElement("p");
+  plot.className = "player-plot";
+  plot.textContent = movie.Plot || "No description is available for this title yet.";
+
+  const facts = document.createElement("dl");
+  facts.className = "info-list";
+  [
+    createInfoRow("Cast", movie.Actors),
+    createInfoRow("Director", movie.Director),
+    createInfoRow("Writer", movie.Writer),
+    createInfoRow("Genre", movie.Genre),
+    createInfoRow("Released", movie.Released),
+    createInfoRow("Language", movie.Language),
+    createInfoRow("Country", movie.Country),
+    createInfoRow("Awards", movie.Awards),
+  ]
+    .filter(Boolean)
+    .forEach((row) => facts.appendChild(row));
+
+  body.appendChild(type);
+  body.appendChild(title);
+  if (meta.children.length) {
+    body.appendChild(meta);
+  }
+  body.appendChild(plot);
+  if (facts.children.length) {
+    body.appendChild(facts);
+  }
+
+  info.appendChild(poster);
+  info.appendChild(body);
+  return info;
+}
+
 function loadPlayerFrame(movie, source) {
   const url = source.buildUrl(movie);
   const frameWrap = document.createElement("div");
@@ -435,7 +549,9 @@ function loadPlayerFrame(movie, source) {
   frameWrap.appendChild(frame);
   frameWrap.appendChild(fallback);
   playerContainer.innerHTML = "";
+  playerContainer.style.setProperty("--player-backdrop", `url("${normalisePoster(movie.Poster)}")`);
   playerContainer.appendChild(frameWrap);
+  playerContainer.appendChild(createPlayerInfo(movie));
   playerContainer.classList.add("active");
 }
 

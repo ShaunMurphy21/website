@@ -350,8 +350,36 @@ main {
 }
 
 .player-shell.active {
-  display: block;
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 8px;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
   animation: cardIn 500ms ease both;
+}
+
+.player-shell.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(90deg, rgba(12, 14, 19, 0.96), rgba(12, 14, 19, 0.72)),
+    var(--player-backdrop);
+  background-position: center;
+  background-size: cover;
+  filter: blur(20px) saturate(1.12);
+  transform: scale(1.08);
+}
+
+.player-shell.active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(12, 14, 19, 0.2), rgba(12, 14, 19, 0.92));
 }
 
 .load-more-wrap {
@@ -390,6 +418,80 @@ main {
 
 .player-fallback p {
   margin: 0;
+}
+
+.player-info {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.46);
+  backdrop-filter: blur(16px);
+}
+
+.player-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.player-info-body h3 {
+  margin: 0;
+  font-size: clamp(1.65rem, 3vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.player-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0 1rem;
+}
+
+.meta-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.28rem 0.62rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.player-plot {
+  max-width: 880px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.info-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  margin: 1.2rem 0 0;
+}
+
+.info-row {
+  min-width: 0;
+}
+
+.info-row dt {
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.info-row dd {
+  margin: 0.22rem 0 0;
+  color: var(--text);
+  line-height: 1.4;
 }
 
 @keyframes heroIn {
@@ -454,6 +556,14 @@ main {
   .movie-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
+
+  .player-info {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+
+  .info-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 520px) {
@@ -467,5 +577,13 @@ main {
 
   .video-frame-wrap iframe {
     min-height: 300px;
+  }
+
+  .player-info {
+    grid-template-columns: 1fr;
+  }
+
+  .player-poster {
+    max-width: 170px;
   }
 }
